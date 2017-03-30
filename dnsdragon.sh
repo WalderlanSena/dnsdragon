@@ -52,16 +52,13 @@ else
   echo -e "$ok Inicializando a busca. Aguarde..."
   for search in $(cat $2);
   do
-    result=$(curl -s --head $1'/'$search | grep 'HTTP/1.1 200 OK')
+    result=$(curl -s --head $1'/'$search | grep -o '200')
     
     v=$(echo -n -e "HTTP/1.1 200 OK")  
     
-    en="HTTP/1.1 200 OK\x0a"
-    #echo -n $encontrada | hd
-    #pnegada="HTTP/1.1 403 Forbidden"
-    #echo -n $result | hd 
+    #pnegada="HTTP/1.1 403 Forbidden" 
 
-    if [ "$v" != "$result" ];
+    if [ "$result" = "200" ];
     then
       echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $found $1/$search"
     else
