@@ -1,5 +1,5 @@
 # :dragon: DnsDragon ![image](https://img.shields.io/pypi/status/Django.svg)
-Pesquise por diretórios ocultos em aplicações web
+:mag_right: Pesquise por diretórios ocultos em aplicações web
 
 Documentação: pt-br
 ## Overview
