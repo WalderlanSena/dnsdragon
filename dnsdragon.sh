@@ -5,12 +5,11 @@
 # Use         : ./dnsdragon [ https://www.siteparaanalisar.com ] dragon.txt
 # Developer   : Walderlan Sena - <http://www.walderlan.xyz/about>
 # Email       : contato@walderlan.xyz
-# LINCENSE    : Lincense GPL <http://gnu.org/lincense/gpl.html>
-# TODO - Software ainda não verifica se a requição foi realizada linha:61  
+# LINCENSE    : Lincense GPL <http://gnu.org/lincense/gpl.html>  
 
 # Variaveis Globais
 
-ok="\033[1;32m[ INICIALIZADO ANALISE ]\033[0m"
+ok="\033[1;32m[ Iniciado a busca ]\033[0m"
 
 error="\033[1;31m[ ERROR ]\033[0m"
 
@@ -52,17 +51,15 @@ else
   echo -e "$ok Inicializando a busca. Aguarde..."
   for search in $(cat $2);
   do
-    result=$(curl -s --head $1'/'$search | grep -o '200')
+    # Realiza a requisição via HTTP com o curl e captura o valor de retorno
+    result=$(curl -s --head $1'/'$search'/' | grep -o -E '200|403')
     
-    v=$(echo -n -e "HTTP/1.1 200 OK")  
-    
-    #pnegada="HTTP/1.1 403 Forbidden" 
-
-    if [ "$result" = "200" ];
+    # Verifica se é um diretorio acessivel ou forbidden
+    if [ "$result" = "200" ] || [ "$result" = "403" ];
     then
-      echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $found $1/$search"
+      echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $found $1/$search/"
     else
-      echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $notfound $1/$search"
+      echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $notfound $1/$search/"
     fi
   done
 fi
