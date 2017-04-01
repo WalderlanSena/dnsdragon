@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # DnsDragon - Pesquise por diretorios em sistemas web
-# Description :  
+# Description :
 # Use         : ./dnsdragon [ https://www.siteparaanalisar.com ] dragon.txt
 # Developer   : Walderlan Sena - <http://www.walderlan.xyz/about>
 # Email       : contato@walderlan.xyz
-# LINCENSE    : Lincense GPL <http://gnu.org/lincense/gpl.html>  
+# LINCENSE    : Lincense GPL <http://gnu.org/lincense/gpl.html>
 
 # Variaveis Globais
+scriptversion="v-beta2"
 
 ok="\033[1;32m[ Iniciado a busca ]\033[0m"
 
@@ -21,45 +22,82 @@ notfound="\033[1;31mNOT FOUND »»»»»»»\033[0m"
 splash(){
 clear # Limpando a tela do terminal
 echo -e '''\033[1;32m
-           ____            ____                              
-          |  _ \ _ __  ___|  _ \ _ __ __ _  __ _  ___  _ __  
-          | | | |  _ \/ __| | | |  __/ _  |/ _  |/ _ \|  _ \ 
+           ____            ____
+          |  _ \ _ __  ___|  _ \ _ __ __ _  __ _  ___  _ __
+          | | | |  _ \/ __| | | |  __/ _  |/ _  |/ _ \|  _ \
           | |_| | | | \__ \ |_| | | | (_| | (_| | (_) | | | |
           |____/|_| |_|___/____/|_|  \__,_|\__, |\___/|_| |_|
-                                           |___/      v-0.0.1
-               \033[1;33m"Pesquise por diretórios em websites"\033[0m 
-                           
+                                           |___/      v-beta2
+               \033[1;33m"Pesquise por diretórios em websites"\033[0m
+
            contato@walderlna.xyz - Developer: Walderlan Sena
              https//www.github.com/WalderlanSena/dnsdragon
 
         \033[0m'''
 } # end function
 
+# Opções do script
+usage="\
+Usage: $0 [SITE] [WORDLIST] [OPTION]...
+   or: $0 [SITE] [WORDLIST] -v  [ Opção padrão ]
+   or: $0 [SITE] [WORDLIST] -s  Host/Diretorio encontrados
+
+Options:
+  --help     display this help and exit.
+  --version  display version info and exit.
+
+  -v  (Opção padrão) Mostra o scaneamento em funcionamento
+  -s  Mostra apenas os Host/Diretorio encontrados
+  -i  instalar no seu desktop /bin/
+
+Exemplo execute:
+  ./dnsdragon.sh https://www.Site.com dragon.txt
+"
+
 # Verifica se os parametros foram passador corretamente
-if [ -z "$1" ] || [ ! -e "$2" ]
+if [ ! -z "$1" ] && [ ! -e "$2" ] && [ -z "$2" ]
 then
-  splash
-  echo -e "$error Passe os parâmetros nescessarios: \n"
-  echo -e "\033[1;33m./dnsdragon [ https://www.siteparaanalisar.com ] dragon.txt\033[0m \n"
-else
+  # Verifica se o usuario deseja um help ou a versão
+  case $1 in
+    --help)
+        splash
+        echo "$usage";;
+    --version)
+        echo $scriptversion;;
+    *)  echo "$usage";
+  esac
+elif [ ! -z "$1" ] && [ -e "$2" ]
+then
   # Chamando tela de Boas Vindas
   splash
   word=$(cat $2 | wc -l)
   echo -e "
-            \t[ \033[1;34mWordlist:\033[0m $word  \033[1;34mInicio:\033[0m `date | cut -d " " -f4` ]
+            \t[ \033[1;34mWordlist:\033[0m $word  \033[1;34mInicio:\033[0m `date +%r`]
           "
-  echo -e "$ok Inicializando a busca. Aguarde..."
+  echo -e "$ok Iniciando a busca..."
   for search in $(cat $2);
   do
     # Realiza a requisição via HTTP com o curl e captura o valor de retorno
     result=$(curl -s --head $1'/'$search'/' | grep -o -E '200|403')
-    
-    # Verifica se é um diretorio acessivel ou forbidden
-    if [ "$result" = "200" ] || [ "$result" = "403" ];
+
+    if [ "$3" != "-s" ]
     then
-      echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $found $1/$search/"
+      # Verifica se é um diretorio acessivel ou forbidden
+      if [ "$result" = "200" ] || [ "$result" = "403" ];
+      then
+        echo -e "\033[0;36m[ `date +%r`]\033[0m $found $1/$search/"
+      else
+        echo -e "\033[0;36m[ `date +%r`]\033[0m $notfound $1/$search/"
+      fi
+      # Caso existe a opção -s passada como parametro
     else
-      echo -e "\033[0;36m[ `date | cut -d " " -f4` ]\033[0m $notfound $1/$search/"
+      if [ "$result" = "200" ] || [ "$result" = "403" ];
+      then
+        echo -e "\033[0;36m[ `date +%r`]\033[0m $found $1/$search/"
+      fi
     fi
   done
+else
+  splash
+  echo -e "$error ./dnsdragon.sh https://www.SiteDesejado.com dragon.txt \n"
 fi
