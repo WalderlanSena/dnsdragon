@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # DnsDragon - Pesquise por diretorios em sistemas web
-# Description :
+# Description : Ache diretorios ocultos em websites com a requisição via Curl
 # Use         : ./dnsdragon [ https://www.siteparaanalisar.com ] dragon.txt
 # Developer   : Walderlan Sena - <http://www.walderlan.xyz/about>
 # Email       : contato@walderlan.xyz
@@ -43,27 +43,40 @@ Usage: $0 [SITE] [WORDLIST] [OPTION]...
    or: $0 [SITE] [WORDLIST] -s  Host/Diretorio encontrados
 
 Options:
-  --help     display this help and exit.
-  --version  display version info and exit.
+  --help     exibir esta ajuda e sair.
+  --version  exibir informações sobre a versão e sair.
 
   -v  (Opção padrão) Mostra o scaneamento em funcionamento
   -s  Mostra apenas os Host/Diretorio encontrados
-  -i  instalar no seu desktop /bin/
+  -i  instalar no seu desktop no diretorio /bin/
 
 Exemplo execute:
   ./dnsdragon.sh https://www.Site.com dragon.txt
+
+  Caso esteja instalado no seu PC utilize:
+  dnsdragon [ Site ] [ wordlist ] [ opcoes ]
 "
 
 # Verifica se os parametros foram passador corretamente
 if [ ! -z "$1" ] && [ ! -e "$2" ] && [ -z "$2" ]
 then
-  # Verifica se o usuario deseja um help ou a versão
+  # Verifica se o usuario deseja um help a versão ou instalar
   case $1 in
     --help)
         splash
         echo "$usage";;
-    --version)
+   --version)
         echo $scriptversion;;
+    -i)
+      echo -e "\033[1;32m[ + ]\033[m Iniciando a instalação em /bin/"
+      if sudo cp dnsdragon.sh /bin/dnsdragon
+      then
+        echo -e "[!] Instalado com sucesso em /bin/ agora realize a chamada do software\n
+        Apenas com 'dnsdragon [ Site ] [ wordlist ] [ opcoes ]'"
+      else
+        echo -e "$error Não foi possivel realizar a instalação..."
+      fi
+      echo "";;
     *)  echo "$usage";
   esac
 elif [ ! -z "$1" ] && [ -e "$2" ]
@@ -89,7 +102,7 @@ then
       else
         echo -e "\033[0;36m[ `date +%r`]\033[0m $notfound $1/$search/"
       fi
-      # Caso existe a opção -s passada como parametro
+      # Caso exista a opção -s passada como parametro
     else
       if [ "$result" = "200" ] || [ "$result" = "403" ];
       then
