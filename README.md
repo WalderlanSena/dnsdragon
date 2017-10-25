@@ -8,7 +8,7 @@
 Documentação: pt-br
 ## Overview
 
-O DnsDragon é um script para scanear aplicações web em busca de dirétorios como: administracao/ login/ dashboard/
+O DnsDragon é um script para scanear aplicações web em busca de diretórios como: administracao/ login/ dashboard/
 
 #### Exemplo do software
 
