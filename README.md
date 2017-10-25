@@ -40,7 +40,7 @@ Para acedermos a outro documento a partir de uma palavra presente no documento a
 
 ### Códigos de retorno
 
-A linha inicial de uma resposta HTTP indica ao cliente se sua requisição foi bem sucedida ou não.[19] Essa situação é fornecida através de um código de retorno (Status-Code) e uma frase explicativa (Reason-Phrase). De acordo com Fielding,[20] o código de status é formado por três dígitos e o primeiro dígito representa a classe que pertence classificada em cinco tipos:
+A linha inicial de uma resposta HTTP indica ao cliente se sua requisição foi bem sucedida ou não Essa situação é fornecida através de um código de retorno (Status-Code) e uma frase explicativa (Reason-Phrase). De acordo com Fielding, o código de status é formado por três dígitos e o primeiro dígito representa a classe que pertence classificada em cinco tipos:
 
 - 1xx: **Informational** (Informação) – utilizada para enviar informações para o cliente de que sua requisição foi recebida e está sendo processada;
 - 2xx: **Success** (Sucesso) – indica que a requisição do cliente foi bem sucedida;
