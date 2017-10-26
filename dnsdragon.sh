@@ -8,7 +8,7 @@
 # LINCENSE    : Lincense GPL <http://gnu.org/lincense/gpl.html>
 
 # Variaveis Globais
-scriptversion="v-beta2"
+scriptversion="v1.0.1"
 
 ok="\033[1;32m[ Iniciado a busca ]\033[0m"
 
@@ -27,7 +27,7 @@ echo -e '''\033[1;32m
           | | | |  _ \/ __| | | |  __/ _  |/ _  |/ _ \|  _ \
           | |_| | | | \__ \ |_| | | | (_| | (_| | (_) | | | |
           |____/|_| |_|___/____/|_|  \__,_|\__, |\___/|_| |_|
-                                           |___/      v-beta2
+                                           |___/       v1.0.1
                \033[1;33m"Pesquise por diretórios em websites"\033[0m
 
            contato@walderlna.xyz - Developer: Walderlan Sena
@@ -48,7 +48,7 @@ Options:
 
   -v  (Opção padrão) Mostra o scaneamento em funcionamento
   -s  Mostra apenas os Host/Diretorio encontrados
-  -i  instalar no seu desktop no diretorio /bin/
+  -i  instalar no seu desktop no diretorio /usr/bin/
 
 Exemplo execute:
   ./dnsdragon.sh https://www.Site.com dragon.txt
@@ -68,10 +68,10 @@ then
    --version)
         echo $scriptversion;;
     -i)
-      echo -e "\033[1;32m[ + ]\033[m Iniciando a instalação em /bin/"
-      if sudo cp dnsdragon.sh /bin/dnsdragon
+      echo -e "\033[1;32m[ + ]\033[m Iniciando a instalação em /usr/bin/"
+      if sudo cp dnsdragon.sh /usr/bin/dnsdragon
       then
-        echo -e "[!] Instalado com sucesso em /bin/ agora realize a chamada do software\n
+        echo -e "[!] Instalado com sucesso em /usr/bin/ agora realize a chamada do software\n
         Apenas com 'dnsdragon [ Site ] [ wordlist ] [ opcoes ]'"
       else
         echo -e "$error Não foi possivel realizar a instalação..."
