@@ -1,7 +1,7 @@
 <h1 align="center">:dragon: DnsDragon !</h1>
 <p align="center">
-  <img src="https://img.shields.io/pypi/status/Django.svg"> 
-   <a href="#"><img src="http://www.walderlan.xyz/assets/licenseGPL.svg" alt="License"></a><br />
+  <img src="https://github.com/WalderlanSena/tagsGit/blob/master/stableDnsDragon.svg"> 
+   <a href="#"><img src="https://github.com/WalderlanSena/tagsGit/blob/master/licenseGPL.svg" alt="License"></a><br />
   :mag_right: Pesquise por diretórios ocultos em aplicações web
 </p>
 
