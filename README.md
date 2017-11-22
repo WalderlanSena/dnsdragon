@@ -2,19 +2,19 @@
 <p align="center">
   <img src="https://github.com/WalderlanSena/tagsGit/blob/master/stableDnsDragon.svg"> 
    <a href="#"><img src="https://github.com/WalderlanSena/tagsGit/blob/master/licenseGPL.svg" alt="License"></a><br />
-  :mag_right: Pesquise por diretórios e arquivos ocultos em aplicações web
+  :mag_right: Pesquise por <b>diretórios</b> e <b>arquivos</b> ocultos em aplicações web
 </p>
 
 Documentação: pt-br
-## Overview
+## Visão geral
 
-O DnsDragon é um script para scanear aplicações web em busca de diretórios como: administracao/ login/ dashboard/. E também realiza busca e downlaods de arquivos encontrados no servidor como> (robots.txt, senha.txt, foto.png, etc).
+O <b>DnsDragon</b> é um script para scanear aplicações web em busca de <b>diretórios</b> como: administracao/ login/ dashboard/. E também realiza busca e downloads de <b>arquivos</b> encontrados no servidor como: (robots.txt, senha.txt, foto.png, etc).
 
 #### Exemplo do software
 
 ![image](https://github.com/WalderlanSena/dnsdragon/blob/master/exemplo.png)
 
-### :computer: Use:
+### :computer: Utilização:
 
 ```shellscript
 ./dnsdragon https://www.SiteQueDesejaScanear.com dragon.txt
