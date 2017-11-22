@@ -8,7 +8,7 @@
 # LINCENSE    : Lincense GPL <http://gnu.org/lincense/gpl.html>
 
 # Variaveis Globais
-scriptversion="v1.0.2"
+scriptversion="v1.1.2"
 
 ok="\033[1;32m[ Iniciado a busca ]\033[0m"
 
